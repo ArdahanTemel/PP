@@ -1,0 +1,131 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <script>
+
+        function transferValues() {
+            var groupAInputs = document.getElementsByClassName("group-a");
+            var groupBInputs = document.getElementsByClassName("group-b");
+
+            for (var i = 0; i < groupAInputs.length; i++) {
+                groupBInputs[i].value = (groupAInputs[i+1].value-groupAInputs[i].value)*(-1);
+            }
+        }
+
+
+
+    window.addEventListener('DOMContentLoaded', function() {
+      // Get the span element and the input field
+      var spanElement = document.getElementById('latestRecordPlusOne');
+      var inputField1 = document.getElementById('form1');
+      var inputField2 = document.getElementById('form2');
+      var inputField3 = document.getElementById('form3');
+      var inputField4 = document.getElementById('form4');
+      var inputField5 = document.getElementById('form5');
+
+
+      // Set the value of the input field to the text of the span
+      inputField1.value = spanElement.textContent;
+      inputField2.value = Number(spanElement.textContent)+1;
+      inputField3.value = Number(spanElement.textContent)+2;
+      inputField4.value = Number(spanElement.textContent)+3;
+      inputField5.value = Number(spanElement.textContent)+4;
+
+    });
+
+
+window.addEventListener('DOMContentLoaded', function() {
+      // Get the selection input fields
+      var firstSelect = document.getElementById('selection1');
+      var secondSelect = document.getElementById('selection2');
+      var thirdSelect = document.getElementById('selection3');
+      var forthSelect = document.getElementById('selection4');
+      var fifthSelect = document.getElementById('selection5');
+
+      var selection1a = document.getElementById('selection1a');
+      var selection1b = document.getElementById('selection1b');
+      var selection1c = document.getElementById('selection1c');
+      var selection2a = document.getElementById('selection2a');
+      var selection2b = document.getElementById('selection2b');
+      var selection2c = document.getElementById('selection2c');
+      var selection3a = document.getElementById('selection3a');
+      var selection3b = document.getElementById('selection3b');
+      var selection3c = document.getElementById('selection3c');
+      var selection4a = document.getElementById('selection4a');
+      var selection4b = document.getElementById('selection4b');
+      var selection4c = document.getElementById('selection4c');
+      var selection5a = document.getElementById('selection5a');
+      var selection5b = document.getElementById('selection5b');
+      var selection5c = document.getElementById('selection5c');
+
+
+      // Add event listener to the first select field
+      firstSelect.addEventListener('change', function() {
+        // Update the value of the second select field based on the selection of the first one
+        secondSelect.value = this.value;
+        thirdSelect.value = this.value;
+        forthSelect.value = this.value;
+        fifthSelect.value = this.value;
+
+        selection1a.value = this.value;
+        selection1b.value = this.value;
+        selection1c.value = this.value;
+        selection2a.value = this.value;
+        selection2b.value = this.value;
+        selection2c.value = this.value;
+        selection3a.value = this.value;
+        selection3b.value = this.value;
+        selection3c.value = this.value;
+        selection4a.value = this.value;
+        selection4b.value = this.value;
+        selection4c.value = this.value;
+        selection5a.value = this.value;
+        selection5b.value = this.value;
+        selection5c.value = this.value;
+
+
+      });
+    });
+
+
+
+    </script>
+
+
+
+
+
+
+</head>
+  <body>
+
+
+
+
+
+{% if messages %}
+<ul class="alert alert-primary">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+  {% block content %}
+  {% endblock  %}
+
+   <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="{% static 'weighingCalculation.js' %}"></script>
+
+</body>
+</html>

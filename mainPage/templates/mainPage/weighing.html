@@ -1,0 +1,310 @@
+{% extends 'mainPage/base.html' %}
+
+
+{% block content %}
+{% include 'mainPage/navbar.html' %}
+<div class="row m-4 ">
+
+    <div class="col col-md-2 ">
+
+        <div class="input-group">
+
+                <span class="input-group-text" >1. Kantar</span>
+            <input type="number" class="form-control group-a" id="input1a">
+
+        </div>
+
+    </div>
+
+    <div class="col col-md-2 y">
+
+        <div class="input-group">
+
+            <span class="input-group-text" >2. Kantar</span>
+            <input type="number" class="form-control group-a" id="input2a">
+
+        </div>
+
+    </div>
+    <div class="col col-md-2 ">
+
+        <div class="input-group">
+
+            <span class="input-group-text" >3. Kantar</span>
+            <input type="number" class="form-control group-a" id="input3a">
+
+        </div>
+
+    </div>
+    <div class="col col-md-2  ">
+
+        <div class="input-group">
+
+                    <span class="input-group-text" >4. Kantar</span>
+            <input type="number" class="form-control group-a" id="input4a">
+
+        </div>
+
+    </div>
+    <div class="col col-md-2 ">
+
+        <div class="input-group">
+
+            <span class="input-group-text" id=>5. Kantar</span>
+            <input type="number" class="form-control group-a" id="input5a">
+
+        </div>
+
+    </div>
+    <div class="col col-md-2 ">
+
+        <div class="input-group">
+            <span class="input-group-text input-group-primary" >6. Kantar</span>
+            <input type="number" class="form-control group-a" id="input6a">
+        </div>
+
+    </div>
+</div>
+<hr class="ml-5 mr-5 bold"/>
+<!--kantar bitiş - giriş başlangıç-->
+
+
+<div class="accordion mt-5" id="accordionExample">
+
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left show" type="button"  data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+
+            <form class="form-inline " action="" method="post">
+                <legend>1.Mal</legend>
+                {% csrf_token %}
+                {{form1}}
+                <button type="submit">kaydet</button>
+            </form>
+
+
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+
+          <form class="form-inline " action="" method="post">
+                <legend>Mal-1a</legend>
+                {% csrf_token %}
+                {{form1a}}
+          </form>
+
+                    <form class="form-inline " action="" method="post">
+                <legend>Mal-1b</legend>
+                {% csrf_token %}
+                {{form1b}}
+          </form>
+
+                    <form class="form-inline " action="" method="post">
+                <legend>Mal-1c</legend>
+                {% csrf_token %}
+                {{form1c}}
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--2.-->
+
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left show" type="button"  data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+
+            <form class="form-inline " action="" method="post">
+                <legend>2.Mal</legend>
+                {% csrf_token %}
+                {{form2}}
+
+            </form>
+
+
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+
+          <form class="form-inline " action="" method="post">
+                <legend>Mal-2a</legend>
+                {% csrf_token %}
+                {{form2a}}
+          </form>
+
+                    <form class="form-inline " action="" method="post">
+                <legend>Mal-2b</legend>
+                {% csrf_token %}
+                {{form2b}}
+          </form>
+
+                    <form class="form-inline " action="" method="post">
+                <legend>Mal-2c</legend>
+                {% csrf_token %}
+                {{form2c}}
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--3.-->
+
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left show" type="button"  data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+
+            <form class="form-inline " action="" method="post">
+                <legend>3.Mal</legend>
+                {% csrf_token %}
+                {{form3}}
+                <input type="submit">
+            </form>
+
+
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+
+          <form class="form-inline " action="" method="post">
+                <legend>Mal-3a</legend>
+                {% csrf_token %}
+                {{form3a}}
+          </form>
+
+                    <form class="form-inline " action="" method="post">
+                <legend>Mal-3b</legend>
+                {% csrf_token %}
+                {{form3b}}
+          </form>
+
+                    <form class="form-inline " action="" method="post">
+                <legend>Mal-3c</legend>
+                {% csrf_token %}
+                {{form3c}}
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--4.-->
+
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left show" type="button"  data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+
+            <form class="form-inline " action="" method="post">
+                <legend>4.Mal</legend>
+                {% csrf_token %}
+                {{form4}}
+                <input type="submit">
+            </form>
+
+
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+
+          <form class="form-inline " action="" method="post">
+                <legend>Mal-4a</legend>
+                {% csrf_token %}
+                {{form4a}}
+          </form>
+
+                    <form class="form-inline " action="" method="post">
+                <legend>Mal-4b</legend>
+                {% csrf_token %}
+                {{form4b}}
+          </form>
+
+                    <form class="form-inline " action="" method="post">
+                <legend>Mal-4c</legend>
+                {% csrf_token %}
+                {{form4c}}
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--5.-->
+
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left show" type="button"  data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+
+            <form class="form-inline " action="" method="post">
+                <legend>5.Mal</legend>
+                {% csrf_token %}
+                {{form5}}
+                <input type="submit">
+            </form>
+
+
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+
+          <form class="form-inline " action="" method="post">
+                <legend>Mal-5a</legend>
+                {% csrf_token %}
+                {{form5a}}
+          </form>
+
+                    <form class="form-inline " action="" method="post">
+                <legend>Mal-5b</legend>
+                {% csrf_token %}
+                {{form5b}}
+          </form>
+
+                    <form class="form-inline " action="" method="post">
+                <legend>Mal-5c</legend>
+                {% csrf_token %}
+                {{form5c}}
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+{% endblock %}
+

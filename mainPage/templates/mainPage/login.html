@@ -1,0 +1,24 @@
+  {% extends 'mainPage/base.html' %}
+    {% block content %}
+
+<div class="row justify-content-center align-items-center mt-5">
+  <div class="col col-md-3 border border-primary rounded-3 p-3">
+      <form method="post">
+        {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">{{LoginForm.username.label}}</label>
+    {{LoginForm.username}}
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">{{LoginForm.password.label}}</label>
+{{LoginForm.password}}
+  </div>
+
+  <button type="submit" class="btn btn-outline-primary ">Giriş</button>
+  </div>
+</div>
+
+</form>
+  {% endblock  %}
+
+
