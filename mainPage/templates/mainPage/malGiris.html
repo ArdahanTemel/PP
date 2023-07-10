@@ -1,0 +1,78 @@
+{% extends 'mainPage/base.html' %}
+
+
+{% block content %}
+{% include 'mainPage/navbar.html' %}
+
+  <script>
+    var currentInputIndex = 3; // Index of the currently visible input field
+
+    function toggleNextInput() {
+      var nextInputIndex = currentInputIndex + 1;
+      var currentInput = document.getElementById("input" + currentInputIndex);
+      var nextInput = document.getElementById("input" + nextInputIndex);
+
+      nextInput.classList.remove("hidden"); // Show the next input field
+
+      currentInputIndex = nextInputIndex; // Update the current input index
+
+      if (nextInputIndex === 6) {
+        // Disable the button if all inputs are visible
+        document.querySelector("button").disabled = true;
+      }
+    }
+
+    window.onload = function() {
+    // Get the value of the span element
+    var spanValue = document.getElementById('mySpan').innerText;
+
+    // Set the value of the input field
+    document.getElementById('myInput').value = spanValue;
+  };
+  </script>
+
+
+
+<div class="row m-4 ">
+
+
+    {%csrf_token%}
+{{kantar.id}}
+    ----
+    {{kantar.kantar1}}
+
+</div>
+
+
+<hr class="ml-5 mr-5 bold"/>
+
+<!--kantar bitiş - giriş başlangıç-->
+
+
+
+
+<div class="row m-5">
+
+    <div class="col col-md-7 ">
+
+
+
+
+    </div>
+
+
+
+
+
+<!--        Query başlangıç-->
+
+    <div class="col col-md-5 border-left border-dark  ">
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+

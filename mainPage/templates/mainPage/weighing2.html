@@ -1,0 +1,329 @@
+{% extends 'mainPage/base.html' %}
+
+
+{% block content %}
+{% include 'mainPage/navbar.html' %}
+<div class="row m-4 ">
+
+    <div class="col col-md-2 ">
+
+        <div class="input-group">
+
+            <span class="input-group-text">1. Kantar</span>
+            <input class="form-control group-a" id="input1a" type="number">
+
+        </div>
+
+    </div>
+
+    <div class="col col-md-2 y">
+
+        <div class="input-group">
+
+            <span class="input-group-text">2. Kantar</span>
+            <input class="form-control group-a" id="input2a" type="number">
+
+        </div>
+
+    </div>
+    <div class="col col-md-2 ">
+
+        <div class="input-group">
+
+            <span class="input-group-text">3. Kantar</span>
+            <input class="form-control group-a" id="input3a" type="number">
+
+        </div>
+
+    </div>
+    <div class="col col-md-2  ">
+
+        <div class="input-group">
+
+            <span class="input-group-text">4. Kantar</span>
+            <input class="form-control group-a" id="input4a" type="number">
+
+        </div>
+
+    </div>
+    <div class="col col-md-2 ">
+
+        <div class="input-group">
+
+            <span class="input-group-text" id=>5. Kantar</span>
+            <input class="form-control group-a" id="input5a" type="number">
+
+        </div>
+
+    </div>
+    <div class="col col-md-2 ">
+
+        <div class="input-group">
+            <span class="input-group-text input-group-primary">6. Kantar</span>
+            <input class="form-control group-a" id="input6a" type="number">
+        </div>
+
+    </div>
+</div>
+<hr class="ml-5 mr-5 bold"/>
+<!--kantar bitiş - giriş başlangıç-->
+
+<div class="row m-5">
+
+    <div class="col col-md-7 ">
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <table class="table table-hover border border-strong">
+                <thead>
+                <tr>
+                    <th scope="col">{{form.alimKodu.label}}</th>
+                    <td>{{form.alimKodu}}</td>
+
+                    <th scope="col">{{form.tedarikEden.label}}</th>
+                    <td>{{form.tedarikEden}}</td>
+
+                    <th scope="col">{{form.tarih.label}}</th>
+                    <td>{{form.tarih}}</td>
+                    <th scope="col">
+                        <button class="btn btn-outline-primary" value="Kaydet" name="submit_button" type="submit">Kaydet</button>
+                        <button class="btn btn-outline-success" value="Fiyat" type="submit" name="submit_button">Fiyat Al</button>
+                    </th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+
+            </table>
+
+            <hr class="divider"/>
+
+            <table class="table table-hover table-active">
+                <thead>
+                <tr>
+                    <th scope="col"> No</th>
+                    <th scope="col"> Mal</th>
+                    <th scope="col"> Miktar</th>
+                    <th scope="col"> Birim Fiyat</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr class="bg-secondary ">
+                    <th scope="row">1</th>
+                    <td>{{form.mal1}}</td>
+                    <td>{{form.miktar1}}</td>
+                    <td>{{form.birimFiyat1}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">1a</th>
+                    <td class="p-3">{{form.mal1a}}</td>
+                    <td class="p-3">{{form.miktar1a}}</td>
+                    <td class="p-3">{{form.birimFiyat1a}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">1b</th>
+                    <td class="p-3">{{form.mal1b}}</td>
+                    <td class="p-3">{{form.miktar1b}}</td>
+                    <td class="p-3">{{form.birimFiyat1b}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">1c</th>
+                    <td class="p-3">{{form.mal1c}}</td>
+                    <td class="p-3">{{form.miktar1c}}</td>
+                    <td class="p-3">{{form.birimFiyat1c}}</td>
+                </tr>
+
+                <tr class="bg-secondary ">
+                    <th scope="row">2</th>
+                    <td class="p-3">{{form.mal2}}</td>
+                    <td class="p-3">{{form.miktar2}}</td>
+                    <td class="p-3">{{form.birimFiyat2}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">2a</th>
+                    <td class="p-3">{{form.mal2a}}</td>
+                    <td class="p-3">{{form.miktar2a}}</td>
+                    <td class="p-3">{{form.birimFiyat2a}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">2b</th>
+                    <td class="p-3">{{form.mal2b}}</td>
+                    <td class="p-3">{{form.miktar2b}}</td>
+                    <td class="p-3">{{form.birimFiyat2b}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">2c</th>
+                    <td class="p-3">{{form.mal2c}}</td>
+                    <td class="p-3">{{form.miktar2c}}</td>
+                    <td class="p-3">{{form.birimFiyat2c}}</td>
+                </tr>
+
+                <tr class="bg-secondary ">
+                    <th scope="row">3</th>
+                    <td class="p-3">{{form.mal3}}</td>
+                    <td class="p-3">{{form.miktar3}}</td>
+                    <td class="p-3">{{form.birimFiyat3}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">3a</th>
+                    <td class="p-3">{{form.mal3a}}</td>
+                    <td class="p-3">{{form.miktar3a}}</td>
+                    <td class="p-3">{{form.birimFiyat3a}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">3b</th>
+                    <td class="p-3">{{form.mal3b}}</td>
+                    <td class="p-3">{{form.miktar3b}}</td>
+                    <td class="p-3">{{form.birimFiyat3b}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">3c</th>
+                    <td class="p-3">{{form.mal3c}}</td>
+                    <td class="p-3">{{form.miktar3c}}</td>
+                    <td class="p-3">{{form.birimFiyat3c}}</td>
+                </tr>
+
+                <tr class="bg-secondary ">
+                    <th scope="row">4</th>
+                    <td class="p-3">{{form.mal4}}</td>
+                    <td class="p-3">{{form.miktar4}}</td>
+                    <td class="p-3">{{form.birimFiyat4}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">4a</th>
+                    <td class="p-3">{{form.mal4a}}</td>
+                    <td class="p-3">{{form.miktar4a}}</td>
+                    <td class="p-3">{{form.birimFiyat4a}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">4b</th>
+                    <td class="p-3">{{form.mal4b}}</td>
+                    <td class="p-3">{{form.miktar4b}}</td>
+                    <td class="p-3">{{form.birimFiyat4b}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">4c</th>
+                    <td class="p-3">{{form.mal4c}}</td>
+                    <td class="p-3">{{form.miktar4c}}</td>
+                    <td class="p-3">{{form.birimFiyat4c}}</td>
+                </tr>
+
+                <tr class="bg-secondary ">
+                    <th scope="row">5</th>
+                    <td class="p-3">{{form.mal5}}</td>
+                    <td class="p-3">{{form.miktar5}}</td>
+                    <td class="p-3">{{form.birimFiyat5}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">5a</th>
+                    <td class="p-3">{{form.mal5a}}</td>
+                    <td class="p-3">{{form.miktar5a}}</td>
+                    <td class="p-3">{{form.birimFiyat5a}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">5b</th>
+                    <td class="p-3">{{form.mal5b}}</td>
+                    <td class="p-3">{{form.miktar5b}}</td>
+                    <td class="p-3">{{form.birimFiyat5b}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">5c</th>
+                    <td class="p-3">{{form.mal5c}}</td>
+                    <td class="p-3">{{form.miktar5c}}</td>
+                    <td class="p-3">{{form.birimFiyat5c}}</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+
+        </form>
+
+
+    </div>
+
+
+
+
+
+<!--        Query başlangıç-->
+
+    <div class="col col-md-5 border-left border-dark  ">
+        {% if supplier %}
+         <legend>{{supplier}}'a verilen fiyatlar</legend>
+        {% endif %}
+
+
+        <table class="table table-hover table-light mt-3 ">
+            <thead>
+            <tr>
+                <th scope="col">Mal</th>
+                <th scope="col">Verilen Fiyat</th>
+                <th scope="col">Tarih</th>
+            </tr>
+            </thead>
+            <tbody>
+                    {% for item in queryBySupplier %}
+            <tr>
+                <td>{{item.mal1}}</td>
+                <td>{{item.birimFiyat1}}</td>
+                <td>{{item.tarih|date:"d/m/Y H:i"}}</td>
+            </tr>
+                           {% endfor %}
+            </tbody>
+
+
+
+        </table>
+
+
+            <hr class="divider"/>
+
+            <legend>{{mal}} için verilen fiyatlar</legend>
+
+        {% for item in materialQueries %}
+                                        {% for it in item %}
+
+                <table class="table table-hover table-light mt-3 ">
+            <thead>
+            <tr>
+                <th scope="col">Tedarikçi</th>
+                <th scope="col">Verilen Fiyat</th>
+                <th scope="col">Tarih</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{it.tedarikEden}}</td>
+                <td>{{it.birimFiyat1}}</td>
+                <td>{{it.tarih|date:"d/m/Y H:i"}}</td>
+            </tr>
+
+
+
+            </tbody>
+        </table>
+        {% endfor %}
+        {% endfor %}
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+
