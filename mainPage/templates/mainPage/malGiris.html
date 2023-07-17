@@ -4,7 +4,7 @@
 {% block content %}
 {% include 'mainPage/navbar.html' %}
 
-  <script>
+<script>
     var currentInputIndex = 3; // Index of the currently visible input field
 
     function toggleNextInput() {
@@ -29,17 +29,58 @@
     // Set the value of the input field
     document.getElementById('myInput').value = spanValue;
   };
-  </script>
 
+</script>
 
 
 <div class="row m-4 ">
+    <div class="col col-md-5 border">
+        <form action="" method="post">
+            {%csrf_token%}
+            {%for formkeys, form in forms.items%}
+            <legend class="mt-3">Mal-{{formkeys|slice:"4:"}}</legend>
+
+            {{form}}
+
+            {% endfor %}
+            <button type="submit" class="btn btn-outline-success mt-3 ">--------Kaydet--------</button>
+        </form>
+    </div>
 
 
-    {%csrf_token%}
-{{kantar.id}}
-    ----
-    {{kantar.kantar1}}
+
+
+    <div class="col col-md-7 border">
+
+        {% for key,value in query.items %}
+        <table class="table" style="caption-side: top;">
+            <caption>{{value.0}}</caption>
+            <thead>
+            <tr>
+                <th scope="col">Mal</th>
+                <th scope="col">Miktar</th>
+                <th scope="col">Birim Fiyat</th>
+                <th scope="col">Hurda</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for alim in value.1 %}
+            <tr>
+                <td>{{alim.mal}}</td>
+                <td>{{alim.miktar}}</td>
+                <td>{{alim.birimFiyat}}</td>
+                <td>{{alim.hurda}}</td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+        <hr class="hr2">
+            {% endfor %}
+
+    </div>
+
 
 </div>
 
@@ -49,22 +90,15 @@
 <!--kantar bitiş - giriş başlangıç-->
 
 
-
-
 <div class="row m-5">
 
     <div class="col col-md-7 ">
 
 
-
-
     </div>
 
 
-
-
-
-<!--        Query başlangıç-->
+    <!--        Query başlangıç-->
 
     <div class="col col-md-5 border-left border-dark  ">
 

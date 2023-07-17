@@ -16,6 +16,11 @@
     border-radius: 5px;
   }
 
+      .hr2 {
+        border: 0;
+        height: 3px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(9, 84, 132), rgba(0, 0, 0, 0));
+      }
 
     .hidden {
       display: none;
@@ -188,6 +193,8 @@ window.addEventListener('DOMContentLoaded', function() {
         {{kantarForm.kantar6}}
               {{kantarForm.tarih}}
         {{kantarForm.tedarikci}}
+              {{kantarForm.note}}
+
 
             <i onclick="toggleNextInput()" class="material-symbols-outlined">add_box</i>
       <div class="modal-footer">

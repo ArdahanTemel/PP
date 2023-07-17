@@ -32,6 +32,10 @@ class Hammadde(models.Model):
         return self.rawMaterialName
 
 
+
+
+
+
 # class Alimlar(models.Model):
 #     alimKodu = models.IntegerField(primary_key=True, verbose_name="ID")
 #     tedarikEden = models.ForeignKey(Tedarikci, on_delete=models.DO_NOTHING, verbose_name="Tedarikçi")
@@ -196,6 +200,10 @@ class Kantar(models.Model):
     kantar6 = models.FloatField(verbose_name="Kantar 6", null=True, blank=True)
     tarih = models.DateTimeField(verbose_name="Tarih", default=datetime.now, blank=True, null=True)
     tedarikci = models.ForeignKey(Tedarikci, on_delete=models.DO_NOTHING, verbose_name="Tedarikçi")
+    note=models.TextField(verbose_name="Not",null=True,blank=True)
+
+    def __str__(self):
+        return f'Kantar {str(self.id)} : {str(self.tarih)[:16]} / {self.tedarikci}'
 
 
 class MalzemeGiris(models.Model):
@@ -205,3 +213,13 @@ class MalzemeGiris(models.Model):
     hurda = models.FloatField(verbose_name="Hurda Ağırlık")
     net = models.FloatField(verbose_name="Net Ağırlık")
     birimFiyat = models.FloatField(verbose_name="Birim Fiyat")
+
+class MalAlim(models.Model):
+    mal = models.ForeignKey(Hammadde, on_delete=models.DO_NOTHING, verbose_name="Malzeme Türü")
+    miktar = models.FloatField(verbose_name="Ağırlık")
+    hurda = models.FloatField(verbose_name="Hurda")
+    birimFiyat = models.FloatField(verbose_name="Birim Fiyat")
+    kantar=models.ForeignKey(Kantar,on_delete=models.DO_NOTHING,verbose_name="Kantar tartım numarası")
+
+    def __str__(self):
+        return f'{str(self.id)} nolu alım : {str(self.miktar)}kg {str(self.mal)}'

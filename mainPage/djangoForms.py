@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm, NumberInput, DateTimeInput, Select, TextInput
+from django.forms import ModelForm, NumberInput, DateTimeInput, Select, TextInput,Textarea
 from . import models
 
 
@@ -444,17 +444,36 @@ class kantarForm(ModelForm):
         fields = "__all__"
         widgets = {
             'giris': NumberInput({'class': "hidden2", "id": "myInput"}),
-            'kantar1': NumberInput({"class": "form-control  ", "id": "input1", 'placeholder': 'Kantar1'}),
-            'kantar2': NumberInput({"class": "form-control ", "id": "input2", 'placeholder': 'Kantar2'}),
-            'kantar3': NumberInput({"class": "form-control ", "id": "input3", 'placeholder': 'Kantar3'}),
-            'kantar4': NumberInput({"class": "hidden form-control ", "id": "input4", 'placeholder': 'Kantar4'}),
-            'kantar5': NumberInput({"class": "hidden form-control ", "id": "input5", 'placeholder': 'Kantar5'}),
-            'kantar6': NumberInput({"class": "hidden form-control ", "id": "input6", 'placeholder': 'Kantar6'}),
-
+            'kantar1': NumberInput({"class": "form-control mb-3 ", "id": "input1", 'placeholder': 'Kantar1'}),
+            'kantar2': NumberInput({"class": "form-control mb-3 ", "id": "input2", 'placeholder': 'Kantar2'}),
+            'kantar3': NumberInput({"class": "form-control mb-3 ", "id": "input3", 'placeholder': 'Kantar3'}),
+            'kantar4': NumberInput({"class": "hidden form-control mb-3 ", "id": "input4", 'placeholder': 'Kantar4'}),
+            'kantar5': NumberInput({"class": "hidden form-control mb-3 ", "id": "input5", 'placeholder': 'Kantar5'}),
+            'kantar6': NumberInput({"class": "hidden form-control mb-3 ", "id": "input6", 'placeholder': 'Kantar6'}),
+            'tarih': DateTimeInput({"class": " form-control mb-3 "}),
+            'tedarikci': Select({"class": "form-control mb-3","placeholder": 'Tedarikçi' }),
+            'note':Textarea({'class':"form-control mb-3","placeholder":"Not girin"})
         }
+
+
+
 
 
 class MalzemeGirisForm(ModelForm):
     class Meta:
         model = models.MalzemeGiris
         fields = "__all__"
+
+
+class MalAlimForm(ModelForm):
+    class Meta:
+        model = models.MalAlim
+        fields = "__all__"
+        exclude = ["kantar"]
+        widgets={
+            'mal': Select({"class": "form-control", }),
+            'miktar': NumberInput({"class":"form-control ", }),
+            'hurda': NumberInput({"class": "form-control ", }),
+            'birimFiyat': NumberInput({"class": "form-control ", }),
+
+        }

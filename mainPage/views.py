@@ -80,26 +80,108 @@ def loginView(request):
         return render(request, "mainPage/login.html", context={"LoginForm": djangoForms.LoginForm})
 
 
+def getLastMalAlimRecords(n):
+    kantarlar = models.Kantar.objects.all().order_by('-tarih')[:n]
+    query = {}
+    for kantar in kantarlar:
+        query[str(kantar)] = (kantar, models.MalAlim.objects.filter(kantar=kantar.id))
+    # for i in query:
+    #     print(i, "*********", query[i])
+    #     print("-------")
+    return query
+
+
 def buy1(request, id):
     if request.method == "GET":
         kantar = models.Kantar.objects.get(id=id)
 
-        if kantar.kantar6 is not None:
-            malAdedi = 5
-        elif kantar.kantar5 is not None:
-            malAdedi = 4
-        elif kantar.kantar4 is not None:
-            malAdedi = 3
-        elif kantar.kantar3 is not None:
-            malAdedi = 2
-        elif kantar.kantar2 is not None:
-            malAdedi = 1
+        def getKantarAmount():
+            if kantar.kantar6 is not None:
+                malAdedi = 5
+            elif kantar.kantar5 is not None:
+                malAdedi = 4
+            elif kantar.kantar4 is not None:
+                malAdedi = 3
+            elif kantar.kantar3 is not None:
+                malAdedi = 2
+            elif kantar.kantar2 is not None:
+                malAdedi = 1
+            # print(malAdedi)
+            return malAdedi
 
+        def getMaterialWeights():
+            weights = {}
+            if getKantarAmount() == 5:
+                weights['w5'] = kantar.kantar5 - kantar.kantar6
+                weights['w4'] = kantar.kantar4 - kantar.kantar5
+                weights['w3'] = kantar.kantar3 - kantar.kantar4
+                weights['w2'] = kantar.kantar2 - kantar.kantar3
+                weights['w1'] = kantar.kantar1 - kantar.kantar2
+            elif getKantarAmount() == 4:
+                weights['w4'] = kantar.kantar4 - kantar.kantar5
+                weights['w3'] = kantar.kantar3 - kantar.kantar4
+                weights['w2'] = kantar.kantar2 - kantar.kantar3
+                weights['w1'] = kantar.kantar1 - kantar.kantar2
+            elif getKantarAmount() == 3:
+                weights['w3'] = kantar.kantar3 - kantar.kantar4
+                weights['w2'] = kantar.kantar2 - kantar.kantar3
+                weights['w1'] = kantar.kantar1 - kantar.kantar2
+            elif getKantarAmount() == 2:
+                weights['w2'] = kantar.kantar2 - kantar.kantar3
+                weights['w1'] = kantar.kantar1 - kantar.kantar2
+            elif getKantarAmount() == 1:
+                weights['w1'] = kantar.kantar1 - kantar.kantar2
 
-        print(malAdedi)
+            return weights
+
+        def setFormAmount(malAdedi):
+
+            if getKantarAmount() == 5:
+                forms = {'form1': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w1']}),
+                         'form2': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w2']}),
+                         'form3': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w3']}),
+                         'form4': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w4']}),
+                         'form5': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w5']}),
+
+                         }
+                return forms
+
+            if getKantarAmount() == 4:
+                forms = {'form1': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w1']}),
+                         'form2': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w2']}),
+                         'form3': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w3']}),
+                         'form4': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w4']}),
+
+                         }
+                return forms
+
+            if getKantarAmount() == 3:
+                forms = {'form1': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w1']}),
+                         'form2': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w2']}),
+                         'form3': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w3']}),
+
+                         }
+                return forms
+
+            if getKantarAmount() == 2:
+                forms = {'form1': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w1']}),
+                         'form2': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w2']}),
+
+                         }
+                return forms
+
+            if getKantarAmount() == 1:
+                forms = {'form1': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w1']}),
+
+                         }
+                return forms
+
+        # print(setFormAmount(getKantarAmount()))
 
         context = {}
+        context['query'] = getLastMalAlimRecords(10)
         context['kantar'] = kantar
+        context['forms'] = setFormAmount(getKantarAmount())
         return render(request, context=context, template_name="mainPage/malGiris.html")
 
     # latestRecordId = models.MalGiris.objects.all().latest("alimKodu").alimKodu
