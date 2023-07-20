@@ -9,8 +9,17 @@ import time
 from django.db.models import Q
 from django.http import QueryDict
 from django.urls import reverse
+from fpdf import FPDF
+import os
 
-
+def showPdf():
+    pdf=FPDF()
+    pdf.add_page()
+    pdf.set_font('Arial', 'B', 16)
+    pdf.cell(200,10,txt="aaaaaaa")
+    pdfFile="output.pdf"
+    pdf.output(pdfFile)
+    return pdfFile
 def mainPageView(request):
     if request.user.is_authenticated:
         context = {}
@@ -81,7 +90,7 @@ def loginView(request):
 
 
 def getLastMalAlimRecords(n):
-    kantarlar = models.Kantar.objects.all().order_by('-tarih')[:n]
+    kantarlar = models.Kantar.objects.all().order_by('-tarih')[1:n]
     query = {}
     for kantar in kantarlar:
         query[str(kantar)] = (kantar, models.MalAlim.objects.filter(kantar=kantar.id))
@@ -92,6 +101,32 @@ def getLastMalAlimRecords(n):
 
 
 def buy1(request, id):
+    if request.method == "POST":
+        # print(dict(request.POST))
+        submittedForms = []
+
+        def getDataFromForms(requestDict):
+            for i in range(len(requestDict['mal'])):
+                submittedForms.append(
+                    models.MalAlim(mal=models.Hammadde.objects.get(id=int(requestDict['mal'][i])),
+                                   miktar=float(requestDict['miktar'][i]),
+                                   hurda=float(requestDict['hurda'][i]),
+                                   birimFiyat=float(requestDict['birimFiyat'][i]),
+                                   kantar=models.Kantar.objects.get(id=int(id)),
+                                   )
+                )
+            return submittedForms
+
+        for alim in getDataFromForms(dict(request.POST)):
+            alim.save()
+
+        # pdf_file=showPdf()
+        # response=HttpResponse(open(pdf_file,'rb').read(),content_type='application/pdf')
+        # response['Content-Disposition']='inline;filename="output.pdf'
+        # os.remove(pdf_file)
+        # return response
+        return redirect('mainPage')
+
     if request.method == "GET":
         kantar = models.Kantar.objects.get(id=id)
 
@@ -137,43 +172,48 @@ def buy1(request, id):
         def setFormAmount(malAdedi):
 
             if getKantarAmount() == 5:
-                forms = {'form1': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w1']}),
-                         'form2': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w2']}),
-                         'form3': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w3']}),
-                         'form4': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w4']}),
-                         'form5': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w5']}),
+                forms = {
+                    'form1': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w1']}),
+                    'form2': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w2']}),
+                    'form3': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w3']}),
+                    'form4': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w4']}),
+                    'form5': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w5']}),
 
-                         }
+                    }
                 return forms
 
             if getKantarAmount() == 4:
-                forms = {'form1': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w1']}),
-                         'form2': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w2']}),
-                         'form3': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w3']}),
-                         'form4': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w4']}),
+                forms = {
+                    'form1': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w1']}),
+                    'form2': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w2']}),
+                    'form3': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w3']}),
+                    'form4': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w4']}),
 
-                         }
+                    }
                 return forms
 
             if getKantarAmount() == 3:
-                forms = {'form1': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w1']}),
-                         'form2': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w2']}),
-                         'form3': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w3']}),
+                forms = {
+                    'form1': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w1']}),
+                    'form2': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w2']}),
+                    'form3': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w3']}),
 
-                         }
+                    }
                 return forms
 
             if getKantarAmount() == 2:
-                forms = {'form1': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w1']}),
-                         'form2': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w2']}),
+                forms = {
+                    'form1': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w1']}),
+                    'form2': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w2']}),
 
-                         }
+                    }
                 return forms
 
             if getKantarAmount() == 1:
-                forms = {'form1': djangoForms.MalAlimForm(initial={'kantar': kantar,'miktar':getMaterialWeights()['w1']}),
+                forms = {
+                    'form1': djangoForms.MalAlimForm(initial={'kantar': kantar, 'miktar': getMaterialWeights()['w1']}),
 
-                         }
+                    }
                 return forms
 
         # print(setFormAmount(getKantarAmount()))
