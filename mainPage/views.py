@@ -11,6 +11,7 @@ from django.http import QueryDict
 from django.urls import reverse
 from fpdf import FPDF
 import os
+from datetime import datetime
 
 
 def showPdf():
@@ -227,23 +228,49 @@ def buy1(request, id):
         context['forms'] = setFormAmount(getKantarAmount())
         return render(request, context=context, template_name="mainPage/malGiris.html")
 
+
 def getQueryBuy(queryDict):
     # {'csrfmiddlewaretoken': ['gQJKvsznZiBU8q3ju3TeuQaRf7QpqPW1idLYswdKXtAgyHWsq6iwjkEaIBI0mSTp'], 'kantarNo': [''],
     #  'tarih': [''], 'tedarikci': ['1'], 'malTipi': ['']}
-    query=models.MalAlim.objects.all()
+    query = models.MalAlim.objects.all()
+    try:
+        if queryDict['tarih'][0][0] == ">":
+            query = query.filter(kantar__tarih__gte=datetime.strptime(queryDict['tarih'][0][1:], '%d.%m.%Y'))
 
-    query=query.filter(mal=models.Hammadde.objects.get(id=queryDict['malTipi'][0]))
-    query=query.filter(kantar__tedarikci=models.Tedarikci.objects.get(id=queryDict['tedarikci'][0]))
-    query=query.filter(kantar=models.Kantar.objects.get(id=queryDict['kantarNo'][0]))
+        elif queryDict['tarih'][0][0] == "<":
+            query = query.filter(kantar__tarih__lt=datetime.strptime(queryDict['tarih'][0][1:], '%d.%m.%Y'))
+
+        else:
+            print("Hatalı giriş")
+    except:
+        print("Hatalı tarih modu")
+
+    try:
+        query = query.filter(mal=models.Hammadde.objects.get(id=queryDict['malTipi'][0]))
+    except:
+        pass
+
+    try:
+        query = query.filter(kantar__tedarikci=models.Tedarikci.objects.get(id=queryDict['tedarikci'][0]))
+    except:
+        pass
+
+    try:
+        query = query.filter(kantar=models.Kantar.objects.get(id=queryDict['kantarNo'][0]))
+    except:
+        pass
+
     print(query)
+    return query
+
 
 def queryTable(request):
-    if request.method=="POST":
-    # print(dict(request.POST))
-        getQueryBuy(dict(request.POST))
+    form = djangoForms.AlimKayitlarQueryForm()
+    context = {}
+    context['form'] = form
+    if request.method == "POST":
+        # print(dict(request.POST))
+        context['query'] = getQueryBuy(dict(request.POST))
+        form = djangoForms.AlimKayitlarQueryForm(request.POST)
 
-    form=djangoForms.AlimKayitlarQueryForm()
-    context={}
-    context['form']=form
-
-    return render(request, 'mainPage/buyQueryTable.html',context=context)
+    return render(request, 'mainPage/buyQueryTable.html', context=context)
