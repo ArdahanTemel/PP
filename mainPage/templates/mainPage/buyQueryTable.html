@@ -2,7 +2,7 @@
 
 {% block content %}
 {% include 'mainPage/navbar.html' %}
-
+{% load i18n %}
 
 <form action="" method="post">
   {%csrf_token%}
@@ -30,12 +30,30 @@
     </tr>
   </thead>
   <tbody>
+  {% for record in query %}
     <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td></td>
+      <td>{{record.kantar.id}}</td>
+      <td>{{record.kantar.kantar1}}</td>
+      <td>{{record.kantar.kantar2}}</td>
+      <td>{{record.kantar.kantar3}}</td>
+      <td>{{record.kantar.kantar4}}</td>
+      <td>{{record.kantar.kantar5}}</td>
+      <td>{{record.kantar.kantar6}}</td>
+      <td>{{record.kantar.note}}</td>
+      <td>{{record.kantar.odeme}}</td>
+      <td>{{record.kantar.nakliyat}}</td>
+
+
+      <td>{{record.kantar.tarih}}</td>
+      <td>{{record.kantar.tedarikci}}</td>
+      <td>{{record.mal}}</td>
+      <td>{{record.miktar}}</td>
+      <td>{{record.hurda}}</td>
+      <td>{{record.birimFiyat}}</td>
     </tr>
+    {% endfor %}
+
   </tbody>
 </table>
 
@@ -43,7 +61,5 @@
 </form>
 
 
-{% for obj in query%}
-{{obj.kantar.kantar1}}
-{% endfor %}
+
 {% endblock %}

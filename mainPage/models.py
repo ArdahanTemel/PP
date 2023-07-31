@@ -46,7 +46,7 @@ class Kantar(models.Model):
     kantar6 = models.FloatField(verbose_name="Kantar 6", null=True, blank=True)
     tarih = models.DateTimeField(verbose_name="Tarih", default=datetime.now, blank=True, null=True)
     tedarikci = models.ForeignKey(Tedarikci, on_delete=models.DO_NOTHING, verbose_name="Tedarikçi")
-    note=models.TextField(verbose_name="Not",null=True,blank=True)
+    note=models.TextField(verbose_name="Not",null=True,blank=True,max_length=180)
     odeme=models.CharField(max_length=100,verbose_name="Ödeme yapıldı mı?",choices=
                            [('EVET','EVET'),('HAYIR','HAYIR')])
     nakliyat=models.CharField(max_length=100,verbose_name="Taşıma",choices=

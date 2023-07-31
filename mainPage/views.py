@@ -9,19 +9,19 @@ import time
 from django.db.models import Q
 from django.http import QueryDict
 from django.urls import reverse
-from fpdf import FPDF
+# from fpdf import FPDF
 import os
 from datetime import datetime
 
 
-def showPdf():
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font('Arial', 'B', 16)
-    pdf.cell(200, 10, txt="aaaaaaa")
-    pdfFile = "output.pdf"
-    pdf.output(pdfFile)
-    return pdfFile
+# def showPdf():
+#     pdf = FPDF()
+#     pdf.add_page()
+#     pdf.set_font('Arial', 'B', 16)
+#     pdf.cell(200, 10, txt="aaaaaaa")
+#     pdfFile = "output.pdf"
+#     pdf.output(pdfFile)
+#     return pdfFile
 
 
 def mainPageView(request):
