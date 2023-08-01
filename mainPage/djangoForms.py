@@ -62,3 +62,4 @@ class AlimKayitlarQueryForm(forms.Form):
     tarih = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Tarih (Örn: >01.01.2023 )","class": "form-control"}),required=False)
     tedarikci = forms.ModelChoiceField(label="Tedarikçi",queryset=models.Tedarikci.objects.all(),widget=forms.Select(attrs={'placeholder':"Tedarikçi","class": "form-control"}),required=False)
     malTipi = forms.ModelChoiceField(label="Mal Tipi",queryset=models.Hammadde.objects.all(),widget=forms.Select(attrs={'placeholder':"Mal Tipi","class": "form-control"}),required=False)
+

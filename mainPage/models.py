@@ -32,11 +32,6 @@ class Hammadde(models.Model):
         return self.rawMaterialName
 
 
-
-
-
-
-
 class Kantar(models.Model):
     kantar1 = models.FloatField(verbose_name="Kantar 1")
     kantar2 = models.FloatField(verbose_name="Kantar 2")
@@ -46,11 +41,12 @@ class Kantar(models.Model):
     kantar6 = models.FloatField(verbose_name="Kantar 6", null=True, blank=True)
     tarih = models.DateTimeField(verbose_name="Tarih", default=datetime.now, blank=True, null=True)
     tedarikci = models.ForeignKey(Tedarikci, on_delete=models.DO_NOTHING, verbose_name="Tedarikçi")
-    note=models.TextField(verbose_name="Not",null=True,blank=True,max_length=180)
-    odeme=models.CharField(max_length=100,verbose_name="Ödeme yapıldı mı?",choices=
-                           [('EVET','EVET'),('HAYIR','HAYIR')])
-    nakliyat=models.CharField(max_length=100,verbose_name="Taşıma",choices=
-                           [('PP','PP'),('Ted','Ted')])
+    note = models.TextField(verbose_name="Not", null=True, blank=True, max_length=180)
+    odeme = models.CharField(max_length=100, verbose_name="Ödeme yapıldı mı?", choices=
+    [('EVET', 'EVET'), ('HAYIR', 'HAYIR')])
+    nakliyat = models.CharField(max_length=100, verbose_name="Taşıma", choices=
+    [('PP', 'PP'), ('Ted', 'Ted')])
+
     def __str__(self):
         return f'Kantar {str(self.id)} : {str(self.tarih)[:16]} / {self.tedarikci}'
 
@@ -63,12 +59,13 @@ class MalzemeGiris(models.Model):
     net = models.FloatField(verbose_name="Net Ağırlık")
     birimFiyat = models.FloatField(verbose_name="Birim Fiyat")
 
+
 class MalAlim(models.Model):
     mal = models.ForeignKey(Hammadde, on_delete=models.DO_NOTHING, verbose_name="Malzeme Türü")
     miktar = models.FloatField(verbose_name="Ağırlık")
     hurda = models.FloatField(verbose_name="Hurda")
     birimFiyat = models.FloatField(verbose_name="Birim Fiyat")
-    kantar=models.ForeignKey(Kantar,on_delete=models.DO_NOTHING,verbose_name="Kantar tartım numarası")
+    kantar = models.ForeignKey(Kantar, on_delete=models.DO_NOTHING, verbose_name="Kantar tartım numarası")
 
     def __str__(self):
         return f'{str(self.id)} nolu alım : {str(self.miktar)}kg {str(self.mal)}'
@@ -88,3 +85,22 @@ class musteri(models.Model):
     bankNumber = models.CharField(max_length=100, verbose_name="Banka Hesap Numarası")
     bank = models.CharField(max_length=100, verbose_name="Banka")
     companyName = models.CharField(max_length=100, verbose_name="Şirket")
+
+    def __str__(self):
+        return self.name + " " + self.surname + " / " + self.companyName
+
+
+class SonUrun(models.Model):
+    urun = models.CharField(max_length=200, verbose_name="Ürün Tipi")
+
+    def __str__(self):
+        return self.urun
+
+
+class Satis(models.Model):
+    musteri = models.ForeignKey(musteri, on_delete=models.DO_NOTHING, verbose_name="Müşteri")
+    miktar = models.FloatField(verbose_name="Miktar")
+    urunTipi = models.ForeignKey(SonUrun, on_delete=models.DO_NOTHING, verbose_name="Ürün Tipi")
+
+    def __str__(self):
+        return f'{str(self.id)} nolu satış : {str(self.miktar)}kg {str(self.urunTipi)}'

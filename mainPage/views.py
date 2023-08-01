@@ -31,6 +31,8 @@ def mainPageView(request):
             kantarForm = djangoForms.kantarForm()
             context['kantarForm'] = kantarForm
             context['now'] = helperFunctions.datetime_to_int()
+            context['buyQuery'] = getLastMalAlimRecords(30)
+
             return render(request, "mainPage/mainPage.html", context=context)
 
         elif request.method == "POST":
@@ -274,3 +276,7 @@ def queryTable(request):
         form = djangoForms.AlimKayitlarQueryForm(request.POST)
 
     return render(request, 'mainPage/buyQueryTable.html', context=context)
+
+
+def sell(request):
+    pass

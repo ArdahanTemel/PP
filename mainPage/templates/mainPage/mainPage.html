@@ -1,7 +1,48 @@
 {% extends 'mainPage/base.html' %}
 
-  {% block content %}
-  {% include 'mainPage/navbar.html' %}
+{% block content %}
+{% include 'mainPage/navbar.html' %}
+
+<div class="row m-3">
+
+    <div class="col col-md-6 p-1  border">
+    <legend class="m-3"><h3>Alımlar</h3> </legend>
+
+            {% for key,value in buyQuery.items %}
+            <table class="table" style="caption-side: top;">
+                <caption>{{value.0}}</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Mal</th>
+                    <th scope="col">Miktar</th>
+                    <th scope="col">Birim Fiyat</th>
+                    <th scope="col">Hurda</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for alim in value.1 %}
+                <tr>
+                    <td>{{alim.mal}}</td>
+                    <td>{{alim.miktar}}</td>
+                    <td>{{alim.birimFiyat}}</td>
+                    <td>{{alim.hurda}}</td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+            <hr class="hr2">
+            {% endfor %}
+
+    </div>
+
+    <div class="col col-md-6 p-1  border">
+        Satışlar
+    </div>
+
+</div>
+
 
 {% endblock %}
 
