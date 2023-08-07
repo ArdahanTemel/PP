@@ -96,7 +96,7 @@ def loginView(request):
 
 
 def getLastMalAlimRecords(n):
-    kantarlar = models.Kantar.objects.all().order_by('-tarih')[1:n]
+    kantarlar = models.Kantar.objects.all().order_by('-tarih')[:n]
     query = {}
     for kantar in kantarlar:
         query[str(kantar)] = (kantar, models.MalAlim.objects.filter(kantar=kantar.id))
@@ -278,5 +278,5 @@ def queryTable(request):
     return render(request, 'mainPage/buyQueryTable.html', context=context)
 
 
-def sell(request):
-    pass
+def sell(request,id):
+    return render(request,'mainPage/sell.html')
