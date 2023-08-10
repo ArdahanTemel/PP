@@ -22,10 +22,13 @@
       <th scope="col">Nakliyatı Karşılayan</th>
       <th scope="col">{{form.tarih}}</th>
       <th scope="col">{{form.tedarikci.label}}{{form.tedarikci}}</th>
+      <th scope="col">Alım ID</th>
       <th scope="col">{{form.malTipi.label}}{{form.malTipi}}</th>
       <th scope="col">Miktar</th>
       <th scope="col">Hurda</th>
       <th scope="col">Birim Fiyat</th>
+      <th scope="col">Ödenecek Tutar</th>
+
 
     </tr>
   </thead>
@@ -47,10 +50,13 @@
 
       <td>{{record.kantar.tarih}}</td>
       <td>{{record.kantar.tedarikci}}</td>
+      <td>{{record.id}}</td>
       <td>{{record.mal}}</td>
       <td>{{record.miktar}}</td>
       <td>{{record.hurda}}</td>
       <td>{{record.birimFiyat}}</td>
+      <td>{{record.odenecek}}</td>
+
     </tr>
     {% endfor %}
 

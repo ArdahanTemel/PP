@@ -63,9 +63,10 @@ class MalzemeGiris(models.Model):
 class MalAlim(models.Model):
     mal = models.ForeignKey(Hammadde, on_delete=models.DO_NOTHING, verbose_name="Malzeme Türü")
     miktar = models.FloatField(verbose_name="Ağırlık")
-    hurda = models.FloatField(verbose_name="Hurda")
+    hurda = models.FloatField(verbose_name="Fire")
     birimFiyat = models.FloatField(verbose_name="Birim Fiyat")
     kantar = models.ForeignKey(Kantar, on_delete=models.DO_NOTHING, verbose_name="Kantar tartım numarası")
+    odenecek = models.FloatField(verbose_name="Ödenecek Tutar")
 
     def __str__(self):
         return f'{str(self.id)} nolu alım : {str(self.miktar)}kg {str(self.mal)}'

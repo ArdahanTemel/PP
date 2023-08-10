@@ -30,6 +30,9 @@
     document.getElementById('myInput').value = spanValue;
   };
 
+
+
+
 </script>
 
 
@@ -60,7 +63,9 @@
                 <th scope="col">Mal</th>
                 <th scope="col">Miktar</th>
                 <th scope="col">Birim Fiyat</th>
-                <th scope="col">Hurda</th>
+                <th scope="col">Fire</th>
+                <th scope="col">Ödenecek Tutar</th>
+
             </tr>
             </thead>
             <tbody>
@@ -70,6 +75,8 @@
                 <td>{{alim.miktar}}</td>
                 <td>{{alim.birimFiyat}}</td>
                 <td>{{alim.hurda}}</td>
+                <td>{{alim.odeme}}</td>
+
             </tr>
             {% endfor %}
 

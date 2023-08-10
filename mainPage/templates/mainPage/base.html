@@ -43,107 +43,7 @@
 
     <script>
 
-
-function transferValues() {
-    var groupAInputs = document.getElementsByClassName("group-a");
-    var groupBInputs = document.getElementsByClassName("group-b");
-    var isAnyGroupAFilled = false;
-
-    for (var i = 0; i < groupAInputs.length - 1; i++) {
-        if (groupAInputs[i].value.trim() !== "" && groupAInputs[i + 1].value.trim() !== "") {
-            groupBInputs[i].value = groupAInputs[i].value - groupAInputs[i + 1].value;
-            isAnyGroupAFilled = true;
-        } else {
-            break;
-        }
-    }
-
-    if (!isAnyGroupAFilled) {
-        for (var j = 0; j < groupBInputs.length; j++) {
-            groupBInputs[j].value = "";
-        }
-    }
-}
-
-
-
-
-    window.addEventListener('DOMContentLoaded', function() {
-      // Get the span element and the input field
-      var spanElement = document.getElementById('latestRecordPlusOne');
-      var inputField1 = document.getElementById('form1');
-      var inputField2 = document.getElementById('form2');
-      var inputField3 = document.getElementById('form3');
-      var inputField4 = document.getElementById('form4');
-      var inputField5 = document.getElementById('form5');
-
-
-      // Set the value of the input field to the text of the span
-      inputField1.value = spanElement.textContent;
-      inputField2.value = Number(spanElement.textContent)+1;
-      inputField3.value = Number(spanElement.textContent)+2;
-      inputField4.value = Number(spanElement.textContent)+3;
-      inputField5.value = Number(spanElement.textContent)+4;
-
-    });
-
-
-window.addEventListener('DOMContentLoaded', function() {
-      // Get the selection input fields
-      var firstSelect = document.getElementById('selection1');
-      var secondSelect = document.getElementById('selection2');
-      var thirdSelect = document.getElementById('selection3');
-      var forthSelect = document.getElementById('selection4');
-      var fifthSelect = document.getElementById('selection5');
-
-      var selection1a = document.getElementById('selection1a');
-      var selection1b = document.getElementById('selection1b');
-      var selection1c = document.getElementById('selection1c');
-      var selection2a = document.getElementById('selection2a');
-      var selection2b = document.getElementById('selection2b');
-      var selection2c = document.getElementById('selection2c');
-      var selection3a = document.getElementById('selection3a');
-      var selection3b = document.getElementById('selection3b');
-      var selection3c = document.getElementById('selection3c');
-      var selection4a = document.getElementById('selection4a');
-      var selection4b = document.getElementById('selection4b');
-      var selection4c = document.getElementById('selection4c');
-      var selection5a = document.getElementById('selection5a');
-      var selection5b = document.getElementById('selection5b');
-      var selection5c = document.getElementById('selection5c');
-
-
-      // Add event listener to the first select field
-      firstSelect.addEventListener('change', function() {
-        // Update the value of the second select field based on the selection of the first one
-        secondSelect.value = this.value;
-        thirdSelect.value = this.value;
-        forthSelect.value = this.value;
-        fifthSelect.value = this.value;
-
-        selection1a.value = this.value;
-        selection1b.value = this.value;
-        selection1c.value = this.value;
-        selection2a.value = this.value;
-        selection2b.value = this.value;
-        selection2c.value = this.value;
-        selection3a.value = this.value;
-        selection3b.value = this.value;
-        selection3c.value = this.value;
-        selection4a.value = this.value;
-        selection4b.value = this.value;
-        selection4c.value = this.value;
-        selection5a.value = this.value;
-        selection5b.value = this.value;
-        selection5c.value = this.value;
-
-
-      });
-    });
-
-
         var currentInputIndex = 3; // Index of the currently visible input field
-
     function toggleNextInput() {
       var nextInputIndex = currentInputIndex + 1;
       var currentInput = document.getElementById("input" + currentInputIndex);
@@ -157,13 +57,16 @@ window.addEventListener('DOMContentLoaded', function() {
         // Disable the button if all inputs are visible
         document.querySelector("button").disabled = true;
       }
-    }
+
+}
+
+
 
     </script>
 
 
-    <!--    Toggle Next Kantar-->
 
+    <!--    Toggle Next Kantar-->
 
 </head>
 <body>

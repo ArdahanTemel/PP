@@ -51,15 +51,22 @@ class MalAlimForm(ModelForm):
         exclude = ["kantar"]
         widgets = {
             'mal': Select({"class": "form-control", }),
-            'miktar': NumberInput({"class": "form-control ", }),
-            'hurda': NumberInput({"class": "form-control ", }),
-            'birimFiyat': NumberInput({"class": "form-control ", }),
+            'miktar': NumberInput({"class": "form-control ", 'id': 'miktar'}),
+            'hurda': NumberInput({"class": "form-control ", 'id': 'hurda'}),
+            'birimFiyat': NumberInput({"class": "form-control ", 'id': 'birimFiyat'}),
+            'odenecek': NumberInput({"class": "form-control ", 'id': 'odenecek'}),
         }
 
 
 class AlimKayitlarQueryForm(forms.Form):
-    kantarNo = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder':"Kantar No","class": "form-control"}),required=False)
-    tarih = forms.CharField(widget=forms.TextInput(attrs={'placeholder':"Tarih (Örn: >01.01.2023 )","class": "form-control"}),required=False)
-    tedarikci = forms.ModelChoiceField(label="Tedarikçi",queryset=models.Tedarikci.objects.all(),widget=forms.Select(attrs={'placeholder':"Tedarikçi","class": "form-control"}),required=False)
-    malTipi = forms.ModelChoiceField(label="Mal Tipi",queryset=models.Hammadde.objects.all(),widget=forms.Select(attrs={'placeholder':"Mal Tipi","class": "form-control"}),required=False)
-
+    kantarNo = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': "Kantar No", "class": "form-control"}),
+                                  required=False)
+    tarih = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': "Tarih (Örn: >01.01.2023 )", "class": "form-control"}),
+        required=False)
+    tedarikci = forms.ModelChoiceField(label="Tedarikçi", queryset=models.Tedarikci.objects.all(),
+                                       widget=forms.Select(attrs={'placeholder': "Tedarikçi", "class": "form-control"}),
+                                       required=False)
+    malTipi = forms.ModelChoiceField(label="Mal Tipi", queryset=models.Hammadde.objects.all(),
+                                     widget=forms.Select(attrs={'placeholder': "Mal Tipi", "class": "form-control"}),
+                                     required=False)

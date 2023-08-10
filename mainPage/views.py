@@ -119,6 +119,7 @@ def buy1(request, id):
                                    hurda=float(requestDict['hurda'][i]),
                                    birimFiyat=float(requestDict['birimFiyat'][i]),
                                    kantar=models.Kantar.objects.get(id=int(id)),
+                                   odenecek=float(requestDict['odenecek'][i])
                                    )
                 )
             return submittedForms
