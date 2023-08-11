@@ -9,6 +9,29 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <script>
+  // Attach event listeners to fields 1, 2, and 3
+  document.getElementById("field1").addEventListener("input", updateField4);
+  document.getElementById("field2").addEventListener("input", updateField4);
+  document.getElementById("field3").addEventListener("input", updateField4);
+
+  function updateField4() {
+    // Get values of fields 1, 2, and 3
+    var field1Value = parseFloat(document.getElementById("field1").value) || 0;
+    var field2Value = parseFloat(document.getElementById("field2").value) || 0;
+    var field3Value = parseFloat(document.getElementById("field3").value) || 0;
+
+    // Perform calculation and update field 4
+    var field4Value = (field1Value - field2Value) * field3Value;
+
+    // Check for NaN result and update field 4 accordingly
+    if (!isNaN(field4Value)) {
+      document.getElementById("field4").value = field4Value;
+    } else {
+      document.getElementById("field4").value = '';
+    }
+  }
+    </script>
     <style>
   .divider {
     border: none;

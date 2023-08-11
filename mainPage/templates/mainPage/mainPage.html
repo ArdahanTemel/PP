@@ -16,16 +16,21 @@
                     <th scope="col">Mal</th>
                     <th scope="col">Miktar</th>
                     <th scope="col">Birim Fiyat</th>
-                    <th scope="col">Hurda</th>
+                    <th scope="col">Fire</th>
+                    <th scope="col">Ödeme</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 {% for alim in value.1 %}
+                
                 <tr>
                     <td>{{alim.mal}}</td>
                     <td>{{alim.miktar}}</td>
                     <td>{{alim.birimFiyat}}</td>
                     <td>{{alim.hurda}}</td>
+                    <td>{{alim.ode}}</td>
+
                 </tr>
                 {% endfor %}
 

@@ -43,7 +43,7 @@ class Kantar(models.Model):
     tedarikci = models.ForeignKey(Tedarikci, on_delete=models.DO_NOTHING, verbose_name="Tedarikçi")
     note = models.TextField(verbose_name="Not", null=True, blank=True, max_length=180)
     odeme = models.CharField(max_length=100, verbose_name="Ödeme yapıldı mı?", choices=
-    [('EVET', 'EVET'), ('HAYIR', 'HAYIR')])
+    [('Ödendi', 'Ödendi'), ('HAYIR', 'HAYIR')])
     nakliyat = models.CharField(max_length=100, verbose_name="Taşıma", choices=
     [('PP', 'PP'), ('Ted', 'Ted')])
 
@@ -67,6 +67,10 @@ class MalAlim(models.Model):
     birimFiyat = models.FloatField(verbose_name="Birim Fiyat")
     kantar = models.ForeignKey(Kantar, on_delete=models.DO_NOTHING, verbose_name="Kantar tartım numarası")
     odenecek = models.FloatField(verbose_name="Ödenecek Tutar")
+
+    @property
+    def ode(self):
+        return (self.miktar-self.hurda)*self.birimFiyat
 
     def __str__(self):
         return f'{str(self.id)} nolu alım : {str(self.miktar)}kg {str(self.mal)}'

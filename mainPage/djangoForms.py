@@ -51,10 +51,10 @@ class MalAlimForm(ModelForm):
         exclude = ["kantar"]
         widgets = {
             'mal': Select({"class": "form-control", }),
-            'miktar': NumberInput({"class": "form-control ", 'id': 'miktar'}),
-            'hurda': NumberInput({"class": "form-control ", 'id': 'hurda'}),
-            'birimFiyat': NumberInput({"class": "form-control ", 'id': 'birimFiyat'}),
-            'odenecek': NumberInput({"class": "form-control ", 'id': 'odenecek'}),
+            'miktar': NumberInput({"class": "form-control field1 ", 'id': 'field1',}),
+            'hurda': NumberInput({"class": "form-control field2 ", 'id': 'field2',}),
+            'birimFiyat': NumberInput({"class": "form-control field3 ", 'id': 'field3',}),
+            'odenecek': NumberInput({"class": "form-control field4 ", 'id': 'field4'}),
         }
 
 
