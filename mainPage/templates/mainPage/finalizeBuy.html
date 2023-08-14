@@ -1,0 +1,73 @@
+{% extends 'mainPage/base.html' %}
+
+
+{% block content %}
+{% include 'mainPage/navbar.html' %}
+{% load i18n %}
+
+<div class="row">
+    <div class="col col-md-12 ">
+
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th scope="col">Alım Kodu</th>
+                <th scope="col">Malzeme</th>
+                <th scope="col">Miktar</th>
+                <th scope="col">Fire</th>
+                <th scope="col">Birim Fiyat</th>
+                <th scope="col">Hesaplanan</th>
+                <th scope="col">Ödenen</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for formID,form in finalBuyForms.items%}
+                <tr>
+                <th>{{formID}}</th>
+                <td>{{form.0.mal}}</td>
+                <td>{{form.0.miktar}}</td>
+                <td>{{form.0.hurda}}</td>
+                <td>{{form.0.birimFiyat}}</td>
+                <td>{{form.0.ode}}</td>
+                <td>{{form.1.odenecek}}</td>
+            </tr>
+                {% endfor %}
+
+
+                                <tr>
+                <th>Toplam</th>
+                <td></td>
+                <td>{{miktar}}</td>
+                <td>{{hurda}}</td>
+                <td></td>
+                <td>{{odeme}}</td>
+                <td>Gercek Odeme</td>
+            </tr>
+            </form>
+
+
+
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--<form action="" , method="post">-->
+<!--    {% csrf_token %}-->
+<!--    {% for formID,form in finalBuyForms.items%}-->
+<!--    <b>{{formID}}</b> numaralı alım {{form}}-->
+
+<!--    {% endfor %}-->
+
+
+<!--    <button type="submit">Kaydet</button>-->
+<!--</form>-->
+
+
+{% endblock  %}

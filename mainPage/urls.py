@@ -16,5 +16,6 @@ urlpatterns = [
     path("al/<int:id>", views.buy1, name="buy"),
     path('al/kayitlar', views.queryTable, name="buyQuery"),
     path('sat/<int:id>', views.sell, name="sat"),
+    path('al/son/<int:kantarID>', views.finalizeBuy, name="finalizeBuy"),
 
 ]

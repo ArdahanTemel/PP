@@ -66,7 +66,7 @@ class MalAlim(models.Model):
     hurda = models.FloatField(verbose_name="Fire")
     birimFiyat = models.FloatField(verbose_name="Birim Fiyat")
     kantar = models.ForeignKey(Kantar, on_delete=models.DO_NOTHING, verbose_name="Kantar tartım numarası")
-    odenecek = models.FloatField(verbose_name="Ödenecek Tutar")
+    odenecek = models.FloatField(verbose_name="Ödenecek Tutar",blank=True,null=True)
 
     @property
     def ode(self):

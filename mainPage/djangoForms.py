@@ -74,3 +74,6 @@ class AlimKayitlarQueryForm(forms.Form):
                               choices=(('EVET', 'EVET'), ('HAYIR', 'HAYIR'),("","---")),
                               widget=forms.Select(attrs={'placeholder': "Ödeme Yapıldı mı?", "class": "form-control"}),
                               required=False)
+
+class FinalizeBuy(forms.Form):
+    odenecek=forms.FloatField(label="",widget=forms.NumberInput(attrs={"class": "form-control odeme"}))

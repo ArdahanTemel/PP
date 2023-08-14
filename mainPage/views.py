@@ -107,10 +107,7 @@ def getLastMalAlimRecords(n):
 
 
 def buy1(request, id):
-    if request.method == "POST" and 'hesapla' in request.POST:
-        pass
-
-    elif request.method == "POST" and 'kaydet' in request.POST:
+    if request.method == "POST" and 'kaydet' in request.POST:
         # print(dict(request.POST))
         submittedForms = []
 
@@ -233,6 +230,34 @@ def buy1(request, id):
         context['kantar'] = kantar
         context['forms'] = setFormAmount(getKantarAmount())
         return render(request, context=context, template_name="mainPage/malGiris.html")
+    # elif request.method == "POST" and 'hesapla' in request.POST:
+    #     def calculatePays(requestDict):
+    #         requestDict=dict[requestDict]
+    #         print(requestDict)
+    #     calculatePays(request.POST)
+
+
+def finalizeBuy(request, kantarID):
+    # Get all alims by kantarID
+    alimQuery = models.MalAlim.objects.filter(kantar=kantarID)
+
+    miktar = 0
+    hurda = 0
+    odeme = 0
+
+    for alim in alimQuery:
+        miktar += alim.miktar
+        hurda += alim.hurda
+        odeme += alim.ode
+    context = {'miktar': miktar, 'hurda': hurda, 'odeme': odeme}
+
+    finalBuyForms = {}
+    for alim in alimQuery:
+        finalBuyForms[f'{alim.id}'] = (alim, djangoForms.FinalizeBuy(initial={'odenecek': alim.ode}))
+
+    context["finalBuyForms"] = finalBuyForms
+
+    return render(request, context=context, template_name="mainPage/finalizeBuy.html")
 
 
 def getQueryBuy(queryDict):
