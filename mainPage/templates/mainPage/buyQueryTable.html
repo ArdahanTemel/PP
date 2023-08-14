@@ -4,6 +4,20 @@
 {% include 'mainPage/navbar.html' %}
 {% load i18n %}
 
+<script>
+  const elements = document.querySelectorAll('.ode');
+let sum = 0;
+
+for (let i = 0; i < elements.length; i++) {
+const value = parseFloat(elements.textContent);
+if (!isNaN(value)) {
+sum += value;
+}
+}
+
+document.getElementById('result').textContent = sum;
+</script>
+
 <form action="" method="post">
   {%csrf_token%}
   <table class="table table-bordered ">
@@ -18,16 +32,17 @@
       <th scope="col">Kantar-5</th>
       <th scope="col">Kantar-6</th>
       <th scope="col">Kantar Notu</th>
-      <th scope="col">Ödeme Yapıldı</th>
+      <th scope="col">{{form.odeme.label}}{{form.odeme}}</th>
       <th scope="col">Nakliyatı Karşılayan</th>
       <th scope="col">{{form.tarih}}</th>
       <th scope="col">{{form.tedarikci.label}}{{form.tedarikci}}</th>
       <th scope="col">Alım ID</th>
       <th scope="col">{{form.malTipi.label}}{{form.malTipi}}</th>
       <th scope="col">Miktar</th>
-      <th scope="col">Hurda</th>
+      <th scope="col">Fire</th>
       <th scope="col">Birim Fiyat</th>
-      <th scope="col">Ödenecek Tutar</th>
+      <th scope="col">Hesaplanan Ödeme</th>
+      <th scope="col">Gerçekleşen Ödeme</th>
 
 
     </tr>
@@ -56,9 +71,36 @@
       <td>{{record.hurda}}</td>
       <td>{{record.birimFiyat}}</td>
       <td>{{record.ode}}</td>
+      <td>{{record.odenecek}}</td>
 
     </tr>
     {% endfor %}
+      <tr>
+      <td></td>
+      <td><b>Toplam</b></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+
+
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><b>{{miktar}}</b></td>
+      <td><b>{{hurda}}</b></td>
+      <td></td>
+      <td><b>{{odeme}}</b></td>
+      <td> <b>{{odemeGercek}}</b></td>
+
+    </tr>
+
 
   </tbody>
 </table>
@@ -66,6 +108,10 @@
 
 </form>
 
+
+<!--miktar&ndash;&gt;{{miktar}}-->
+<!--hurda&ndash;&gt;{{hurda}}-->
+<!--odeme&ndash;&gt;{{odeme}}-->
 
 
 {% endblock %}

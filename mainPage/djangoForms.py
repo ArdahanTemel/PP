@@ -51,9 +51,9 @@ class MalAlimForm(ModelForm):
         exclude = ["kantar"]
         widgets = {
             'mal': Select({"class": "form-control", }),
-            'miktar': NumberInput({"class": "form-control field1 ", 'id': 'field1',}),
-            'hurda': NumberInput({"class": "form-control field2 ", 'id': 'field2',}),
-            'birimFiyat': NumberInput({"class": "form-control field3 ", 'id': 'field3',}),
+            'miktar': NumberInput({"class": "form-control field1 ", 'id': 'field1', }),
+            'hurda': NumberInput({"class": "form-control field2 ", 'id': 'field2', }),
+            'birimFiyat': NumberInput({"class": "form-control field3 ", 'id': 'field3', }),
             'odenecek': NumberInput({"class": "form-control field4 ", 'id': 'field4'}),
         }
 
@@ -70,3 +70,7 @@ class AlimKayitlarQueryForm(forms.Form):
     malTipi = forms.ModelChoiceField(label="Mal Tipi", queryset=models.Hammadde.objects.all(),
                                      widget=forms.Select(attrs={'placeholder': "Mal Tipi", "class": "form-control"}),
                                      required=False)
+    odeme = forms.ChoiceField(label="Ödendi ?",
+                              choices=(('EVET', 'EVET'), ('HAYIR', 'HAYIR'),("","---")),
+                              widget=forms.Select(attrs={'placeholder': "Ödeme Yapıldı mı?", "class": "form-control"}),
+                              required=False)

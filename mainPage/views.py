@@ -107,7 +107,10 @@ def getLastMalAlimRecords(n):
 
 
 def buy1(request, id):
-    if request.method == "POST":
+    if request.method == "POST" and 'hesapla' in request.POST:
+        pass
+
+    elif request.method == "POST" and 'kaydet' in request.POST:
         # print(dict(request.POST))
         submittedForms = []
 
@@ -262,6 +265,19 @@ def getQueryBuy(queryDict):
         query = query.filter(kantar=models.Kantar.objects.get(id=queryDict['kantarNo'][0]))
     except:
         pass
+    # print("aaaaaaa","-",queryDict['odeme'][0])
+    # for i in models.Kantar.objects.filter(odeme=queryDict['odeme'][0]):
+    #     print(i.id,"-",i.odeme)
+
+    # query = query.filter(kantar__odeme=queryDict['odeme'][0])
+
+    try:
+        if queryDict['odeme'][0] == "":
+            pass
+        else:
+            query = query.filter(kantar__odeme=queryDict['odeme'][0])
+    except:
+        pass
 
     print(query)
     return query
@@ -272,12 +288,26 @@ def queryTable(request):
     context = {}
     context['form'] = form
     if request.method == "POST":
-        # print(dict(request.POST))
+        miktar = 0
+        hurda = 0
+        odeme = 0
+        odemeGercek = 0
+        for item in getQueryBuy(dict(request.POST)):
+            miktar += item.miktar
+            hurda += item.hurda
+            odeme += item.ode
+            odemeGercek += item.odenecek
+
+        context['miktar'] = miktar
+        context['hurda'] = hurda
+        context['odeme'] = odeme
+        context['odemeGercek'] = odemeGercek
+
         context['query'] = getQueryBuy(dict(request.POST))
         form = djangoForms.AlimKayitlarQueryForm(request.POST)
 
     return render(request, 'mainPage/buyQueryTable.html', context=context)
 
 
-def sell(request,id):
-    return render(request,'mainPage/sell.html')
+def sell(request, id):
+    return render(request, 'mainPage/sell.html')
