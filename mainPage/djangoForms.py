@@ -76,4 +76,4 @@ class AlimKayitlarQueryForm(forms.Form):
                               required=False)
 
 class FinalizeBuy(forms.Form):
-    odenecek=forms.FloatField(label="",widget=forms.NumberInput(attrs={"class": "form-control odeme"}))
+    odenecek=forms.FloatField(label="",widget=forms.NumberInput(attrs={"class": "form-control sum-input"}))

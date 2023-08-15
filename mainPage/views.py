@@ -238,6 +238,25 @@ def buy1(request, id):
 
 
 def finalizeBuy(request, kantarID):
+    if request.method == "POST":
+        # print(dict(request.POST)['odenecek'][0])
+        # print('------')
+        # print(kantarID)
+
+        alimlar=models.MalAlim.objects.filter(kantar=kantarID)
+        # alimlar[0].odenecek=500
+
+        for i in alimlar:
+            print(i)
+            print("aaaa")
+        for i in range(len(dict(request.POST)['odenecek'])):
+
+            alimlar[i].odenecek=dict(request.POST)['odenecek'][i]
+            print(alimlar[i].odenecek)
+            alimlar[i].save()
+        return redirect(reverse("mainPage"))
+
+
     # Get all alims by kantarID
     alimQuery = models.MalAlim.objects.filter(kantar=kantarID)
 

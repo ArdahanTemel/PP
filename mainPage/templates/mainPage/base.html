@@ -10,6 +10,37 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Get all the input fields with the class 'sum-input'
+    const inputFields = document.querySelectorAll(".sum-input");
+
+    // Get the <td> element where you want to display the sum
+    const sumTd = document.getElementById("sum-td");
+
+    // Function to calculate and update the sum
+    function updateSum() {
+        let sum = 0;
+        inputFields.forEach((inputField) => {
+            sum += parseFloat(inputField.value) || 0;
+        });
+
+        // Update the content of the <td> element with the calculated sum
+        sumTd.textContent = sum;
+    }
+
+    // Listen for changes in the input fields
+    inputFields.forEach((inputField) => {
+        inputField.addEventListener("change", updateSum);
+    });
+
+    // Initial sum calculation and update
+    updateSum();
+
+    });
+    </script>
+
+
 
     <style>
   .divider {
@@ -61,6 +92,8 @@
       }
 
 }
+
+
 
 
 

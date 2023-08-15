@@ -1,6 +1,8 @@
 {% extends 'mainPage/base.html' %}
 
 
+
+
 {% block content %}
 {% include 'mainPage/navbar.html' %}
 {% load i18n %}
@@ -8,7 +10,7 @@
 <div class="row">
     <div class="col col-md-12 ">
 
-        <table class="table table-striped ">
+        <table class="table table-bordered table-secondary">
             <thead>
             <tr>
                 <th scope="col">Alım Kodu</th>
@@ -38,14 +40,17 @@
 
 
                                 <tr>
-                <th>Toplam</th>
-                <td></td>
+                <th>
+                <button class="btn btn-outline-success" type="submit">Kaydet</button>
+                </th>
+                <td>Toplam</td>
                 <td>{{miktar}}</td>
                 <td>{{hurda}}</td>
                 <td></td>
                 <td>{{odeme}}</td>
-                <td>Gercek Odeme</td>
+                <td id="sum-td">0</td>
             </tr>
+
             </form>
 
 
