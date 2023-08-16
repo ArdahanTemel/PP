@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm, NumberInput, DateTimeInput, Select, TextInput, Textarea
+from django.forms import ModelForm, NumberInput, DateTimeInput, Select, TextInput, Textarea,DateInput
 from . import models
 
 
@@ -48,13 +48,13 @@ class MalAlimForm(ModelForm):
     class Meta:
         model = models.MalAlim
         fields = "__all__"
-        exclude = ["kantar"]
+        exclude = ["kantar",'odenecek']
         widgets = {
             'mal': Select({"class": "form-control", }),
             'miktar': NumberInput({"class": "form-control field1 ", 'id': 'field1', }),
             'hurda': NumberInput({"class": "form-control field2 ", 'id': 'field2', }),
             'birimFiyat': NumberInput({"class": "form-control field3 ", 'id': 'field3', }),
-            'odenecek': NumberInput({"class": "form-control field4 ", 'id': 'field4'}),
+            # 'odenecek': NumberInput({"class": "form-control field4 ", 'id': 'field4','placeholder':0},),
         }
 
 
@@ -77,3 +77,21 @@ class AlimKayitlarQueryForm(forms.Form):
 
 class FinalizeBuy(forms.Form):
     odenecek=forms.FloatField(label="",widget=forms.NumberInput(attrs={"class": "form-control sum-input"}))
+
+
+
+class faturasizForm(ModelForm):
+    class Meta:
+        model=models.Kantar
+        exclude = ["kantar3", 'kantar4','kantar4','kantar4']
+        widgets = {
+            'kantar1': NumberInput({"class": "form-control mb-3",'placeholder': 'Kantar1' }),
+            'kantar2': NumberInput({"class": "form-control mb-3",'placeholder': 'Kantar2' }),
+            'tedarikci': Select({"class": "form-control mb-3", "placeholder": 'Tedarikçi'}),
+            'note': Textarea({'class': "form-control mb-3", "placeholder": "Not girin"}),
+            'odeme': Select({'class': 'form-control mb-3', 'placeholder': 'Ödeme yapıldı mı?'}),
+            'nakliyat': Select({'class': 'form-control mb-3', 'placeholder': 'Nakliyatı kim yaptı?'}),
+            'faturaNo': TextInput({'class': "form-control mb-3", "placeholder": "Fatura No"}),
+            'faturaTarihi':DateInput({'class': "form-control mb-3", "placeholder": "YYYY-AA-GG formatında"}),
+
+        }

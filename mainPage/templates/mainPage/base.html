@@ -140,7 +140,7 @@
                     <i onclick="toggleNextInput()" class="material-symbols-outlined">add_box</i>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                        <button type="submit" name="faturasiz" class="btn btn-primary">Kaydet</button>
                     </div>
                     <!--        <button type="submit">Kaydet</button>-->
                 </form>
@@ -152,6 +152,57 @@
 </div>
 
 <!--Modal end-->
+
+
+
+
+<!--Modal 2 -->
+<div class="modal" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle2">Kantar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{kantarFormu.kantar1}}
+                    {{kantarFormu.kantar2}}
+                    {{kantarFormu.tedarikci.label}}
+                    {{kantarFormu.tedarikci}}
+                    {{kantarFormu.odeme.label}}
+                    {{kantarFormu.odeme}}
+                    {{kantarFormu.nakliyat.label}}
+                    {{kantarFormu.nakliyat}}
+                    {{kantarFormu.note}}
+                    {{kantarFormu.faturaNo}}
+                    {{kantarFormu.faturaTarihi.label}}
+                    {{kantarFormu.faturaTarihi}}
+
+
+
+<!--                    <i onclick="toggleNextInput()" class="material-symbols-outlined">add_box</i>-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                        <button type="submit" name="faturali" class="btn btn-primary">Kaydet</button>
+                    </div>
+                    <!--        <button type="submit">Kaydet</button>-->
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!--Modal2 End-->
+
 
 {% if messages %}
 <ul class="alert alert-primary">

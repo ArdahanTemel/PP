@@ -32,10 +32,11 @@ def mainPageView(request):
             context['kantarForm'] = kantarForm
             context['now'] = helperFunctions.datetime_to_int()
             context['buyQuery'] = getLastMalAlimRecords(30)
+            context['kantarFormu'] = djangoForms.faturasizForm
 
             return render(request, "mainPage/mainPage.html", context=context)
 
-        elif request.method == "POST":
+        elif request.method == "POST" and "faturasiz" in request.POST:
             kantarForm = djangoForms.kantarForm(request.POST)
 
             # data_copy.pop('giris', None)
@@ -55,6 +56,19 @@ def mainPageView(request):
                 print("Valid Değil")
                 print(request.POST)
                 context['kantarForm'] = kantarForm
+                return render(request, "mainPage/mainPage.html", context=context)
+        elif request.method=="POST" and "faturali" in request.POST:
+            print("Faturali Post gördü")
+            kantarFormu=djangoForms.faturasizForm(request.POST)
+            if kantarFormu.is_valid():
+                instance=kantarFormu.save()
+                return redirect(reverse('buy',kwargs={'id':instance.id}))
+            else:
+                kantarForm = djangoForms.kantarForm()
+                context['kantarForm'] = kantarForm
+                context['now'] = helperFunctions.datetime_to_int()
+                context['buyQuery'] = getLastMalAlimRecords(30)
+                context['kantarFormu'] = djangoForms.faturasizForm
                 return render(request, "mainPage/mainPage.html", context=context)
 
         # print(request.user.username)
@@ -119,7 +133,7 @@ def buy1(request, id):
                                    hurda=float(requestDict['hurda'][i]),
                                    birimFiyat=float(requestDict['birimFiyat'][i]),
                                    kantar=models.Kantar.objects.get(id=int(id)),
-                                   odenecek=float(requestDict['odenecek'][i])
+                                   # odenecek=float(requestDict['odenecek'][i])
                                    )
                 )
             return submittedForms
@@ -132,7 +146,7 @@ def buy1(request, id):
         # response['Content-Disposition']='inline;filename="output.pdf'
         # os.remove(pdf_file)
         # return response
-        return redirect('mainPage')
+        return redirect(reverse('finalizeBuy', kwargs={'kantarID': id}))
 
     if request.method == "GET":
         kantar = models.Kantar.objects.get(id=id)

@@ -46,6 +46,8 @@ class Kantar(models.Model):
     [('EVET', 'EVET'), ('HAYIR', 'HAYIR')])
     nakliyat = models.CharField(max_length=100, verbose_name="Taşıma", choices=
     [('PP', 'PP'), ('Ted', 'Ted')])
+    faturaNo = models.TextField(verbose_name="Fatura No", null=True, blank=True)
+    faturaTarihi = models.DateField(verbose_name="Fatura Tarihi", null=True, blank=True,)
 
     def __str__(self):
         return f'Kantar {str(self.id)} : {str(self.tarih)[:16]} / {self.tedarikci}'
@@ -66,11 +68,11 @@ class MalAlim(models.Model):
     hurda = models.FloatField(verbose_name="Fire")
     birimFiyat = models.FloatField(verbose_name="Birim Fiyat")
     kantar = models.ForeignKey(Kantar, on_delete=models.DO_NOTHING, verbose_name="Kantar tartım numarası")
-    odenecek = models.FloatField(verbose_name="Ödenecek Tutar",blank=True,null=True)
+    odenecek = models.FloatField(verbose_name="Ödenecek Tutar", blank=True, null=True)
 
     @property
     def ode(self):
-        return (self.miktar-self.hurda)*self.birimFiyat
+        return (self.miktar - self.hurda) * self.birimFiyat
 
     def __str__(self):
         return f'{str(self.id)} nolu alım : {str(self.miktar)}kg {str(self.mal)}'
