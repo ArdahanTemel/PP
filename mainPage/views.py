@@ -367,5 +367,12 @@ def queryTable(request):
     return render(request, 'mainPage/buyQueryTable.html', context=context)
 
 
-def sell(request, id):
+def sell(request):
     return render(request, 'mainPage/sell.html')
+
+
+def redirectToKantarEdit(request, kantarID):
+    return redirect(f"../../admin/mainPage/kantar/{kantarID}/change/")
+
+def redirectToAlimEdit(request, alimID):
+    return redirect(f"../../admin/mainPage/malalim/{alimID}/change/")

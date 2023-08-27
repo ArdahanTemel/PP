@@ -47,7 +47,7 @@ class Kantar(models.Model):
     nakliyat = models.CharField(max_length=100, verbose_name="Taşıma", choices=
     [('PP', 'PP'), ('Ted', 'Ted')])
     faturaNo = models.TextField(verbose_name="Fatura No", null=True, blank=True)
-    faturaTarihi = models.DateField(verbose_name="Fatura Tarihi", null=True, blank=True,)
+    faturaTarihi = models.DateField(verbose_name="Fatura Tarihi", null=True, blank=True, )
 
     def __str__(self):
         return f'Kantar {str(self.id)} : {str(self.tarih)[:16]} / {self.tedarikci}'
@@ -108,6 +108,10 @@ class Satis(models.Model):
     musteri = models.ForeignKey(musteri, on_delete=models.DO_NOTHING, verbose_name="Müşteri")
     miktar = models.FloatField(verbose_name="Miktar")
     urunTipi = models.ForeignKey(SonUrun, on_delete=models.DO_NOTHING, verbose_name="Ürün Tipi")
+    birimFiyat = models.FloatField(verbose_name="Birim Fiyat")
+    satisTarihi = models.DateTimeField(verbose_name="Satış Tarihi", default=datetime.now)
+    faturaNo = models.TextField(verbose_name="Fatura No",)
+    faturaTarihi = models.DateField(verbose_name="Fatura Tarihi",default=datetime.today)
 
     def __str__(self):
         return f'{str(self.id)} nolu satış : {str(self.miktar)}kg {str(self.urunTipi)}'

@@ -51,7 +51,7 @@ document.getElementById('result').textContent = sum;
   {% for record in query %}
     <tr>
       <td></td>
-      <td>{{record.kantar.id}}</td>
+      <td><a href="{% url "redirect" kantarID=record.kantar.id %}">{{record.kantar.id}}</a></td>
       <td>{{record.kantar.kantar1}}</td>
       <td>{{record.kantar.kantar2}}</td>
       <td>{{record.kantar.kantar3}}</td>
@@ -65,7 +65,7 @@ document.getElementById('result').textContent = sum;
 
       <td>{{record.kantar.tarih}}</td>
       <td>{{record.kantar.tedarikci}}</td>
-      <td>{{record.id}}</td>
+      <td><a href="{% url "redirectAlim" alimID=record.id %}">{{record.id}}</a></td>
       <td>{{record.mal}}</td>
       <td>{{record.miktar}}</td>
       <td>{{record.hurda}}</td>
