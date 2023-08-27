@@ -57,12 +57,12 @@ def mainPageView(request):
                 print(request.POST)
                 context['kantarForm'] = kantarForm
                 return render(request, "mainPage/mainPage.html", context=context)
-        elif request.method=="POST" and "faturali" in request.POST:
+        elif request.method == "POST" and "faturali" in request.POST:
             print("Faturali Post gördü")
-            kantarFormu=djangoForms.faturasizForm(request.POST)
+            kantarFormu = djangoForms.faturasizForm(request.POST)
             if kantarFormu.is_valid():
-                instance=kantarFormu.save()
-                return redirect(reverse('buy',kwargs={'id':instance.id}))
+                instance = kantarFormu.save()
+                return redirect(reverse('buy', kwargs={'id': instance.id}))
             else:
                 kantarForm = djangoForms.kantarForm()
                 context['kantarForm'] = kantarForm
@@ -257,19 +257,17 @@ def finalizeBuy(request, kantarID):
         # print('------')
         # print(kantarID)
 
-        alimlar=models.MalAlim.objects.filter(kantar=kantarID)
+        alimlar = models.MalAlim.objects.filter(kantar=kantarID)
         # alimlar[0].odenecek=500
 
         for i in alimlar:
             print(i)
             print("aaaa")
         for i in range(len(dict(request.POST)['odenecek'])):
-
-            alimlar[i].odenecek=dict(request.POST)['odenecek'][i]
+            alimlar[i].odenecek = dict(request.POST)['odenecek'][i]
             print(alimlar[i].odenecek)
             alimlar[i].save()
         return redirect(reverse("mainPage"))
-
 
     # Get all alims by kantarID
     alimQuery = models.MalAlim.objects.filter(kantar=kantarID)
@@ -368,11 +366,25 @@ def queryTable(request):
 
 
 def sell(request):
-    return render(request, 'mainPage/sell.html')
+    form = djangoForms.SatisForm()
+
+    if request.method == "POST":
+        form = djangoForms.SatisForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print('form başarılı kayedildi')
+            return redirect(reverse('mainPage'))
+        else:
+            print('form hatalı')
+
+    context = {'form': form}
+
+    return render(request, 'mainPage/sell.html', context=context)
 
 
 def redirectToKantarEdit(request, kantarID):
     return redirect(f"../../admin/mainPage/kantar/{kantarID}/change/")
+
 
 def redirectToAlimEdit(request, alimID):
     return redirect(f"../../admin/mainPage/malalim/{alimID}/change/")

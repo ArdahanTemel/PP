@@ -95,3 +95,18 @@ class faturasizForm(ModelForm):
             'faturaTarihi':DateInput({'class': "form-control mb-3", "placeholder": "YYYY-AA-GG formatında"}),
 
         }
+
+
+class SatisForm(ModelForm):
+    class Meta:
+        model = models.Satis
+        fields = "__all__"
+        widgets = {
+            'musteri': Select({"class": "form-control", }),
+            'miktar': NumberInput({"class": "form-control field1 ", }),
+            'urunTipi': Select({"class": "form-control field2 ", }),
+            'birimFiyat': NumberInput({"class": "form-control  ",}),
+            'satisTarihi':DateTimeInput({"class": "form-control  ",}),
+            'faturaNo':TextInput({"class": "form-control  ",}),
+            'faturaTarihi':DateInput({"class": "form-control  ",})
+        }
