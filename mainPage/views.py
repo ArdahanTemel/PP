@@ -22,6 +22,9 @@ from datetime import datetime
 #     pdfFile = "output.pdf"
 #     pdf.output(pdfFile)
 #     return pdfFile
+def getSatisQuery(n):
+    return models.Satis.objects.all().order_by('-satisTarihi')[:n]
+
 
 
 def mainPageView(request):
@@ -34,7 +37,11 @@ def mainPageView(request):
             context['buyQuery'] = getLastMalAlimRecords(30)
             context['kantarFormu'] = djangoForms.faturasizForm
 
+            context['satislar'] = getSatisQuery(30)
+
+
             return render(request, "mainPage/mainPage.html", context=context)
+
 
         elif request.method == "POST" and "faturasiz" in request.POST:
             kantarForm = djangoForms.kantarForm(request.POST)

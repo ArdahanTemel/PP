@@ -6,10 +6,10 @@
 <div class="row m-3">
 
     <div class="col col-md-6 p-1  border">
-    <legend class="m-3"><h3>Alımlar</h3> </legend>
+    <legend class="m-3"><h3>Son Alımlar</h3> </legend>
 
             {% for key,value in buyQuery.items %}
-            <table class="table" style="caption-side: top;">
+            <table class="table table-secondary" style="caption-side: top;">
                 <caption>{{value.0}}</caption>
                 <thead>
                 <tr>
@@ -47,7 +47,38 @@
     </div>
 
     <div class="col col-md-6 p-1  border">
-        Satışlar
+    <legend class="m-3"><h3>Son Satışlar</h3> </legend>
+
+        <table class="table table-secondary" style="caption-side: top;">
+                <thead>
+                <tr>
+                    <th scope="col">Müşteri</th>
+                    <th scope="col">Miktar</th>
+                    <th scope="col">Ürün Tipi</th>
+                    <th scope="col">Birim Fiyat</th>
+                    <th scope="col">Satış tarihi</th>
+                    <th scope="col">Fatura No</th>
+                    <th scope="col">Fatura Tarihi</th>
+                </tr>
+                </thead>
+
+               {% for satis in satislar %}
+
+                <tr>
+                    <td>{{satis.musteri}}</td>
+                    <td>{{satis.miktar}}</td>
+                    <td>{{satis.urunTipi}}</td>
+                    <td>{{satis.birimFiyat}}</td>
+                    <td>{{satis.satisTarihi}}</td>
+                    <td>{{satis.faturaNo}}</td>
+                    <td>{{satis.faturaTarihi}}</td>
+
+
+                </tr>
+                {% endfor %}
+
+
+
     </div>
 
 </div>
