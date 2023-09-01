@@ -12,6 +12,8 @@ from django.urls import reverse
 # from fpdf import FPDF
 import os
 from datetime import datetime
+import datetime as genelDateTime
+import pytz
 
 
 # def showPdf():
@@ -26,11 +28,24 @@ def getSatisQuery(n):
     return models.Satis.objects.all().order_by('-satisTarihi')[:n]
 
 
-
 def mainPageView(request):
     if request.user.is_authenticated:
         context = {}
         if request.method == "GET":
+            dailyMiktar, dailyFire, dailyOdeme = pivotBuy(timedQuery(1))
+            weeklyMiktar, weeklyFire, weeklyOdeme = pivotBuy(timedQuery(7))
+            monthlyMiktar, monthlyFire, monthlyOdeme = pivotBuy(timedQuery(30))
+            context['dailyMiktar'] = dailyMiktar
+            context['dailyFire'] = dailyFire
+            context['dailyOdeme'] = dailyOdeme
+            context['weeklyMiktar'] = weeklyMiktar
+            context['weeklyFire'] = weeklyFire
+            context['weeklyOdeme'] = weeklyOdeme
+            context['monthlyMiktar'] = monthlyMiktar
+            context['monthlyFire'] = monthlyFire
+            context['monthlyOdeme'] = monthlyOdeme
+
+            print(pivotBuy(timedQuery(7)))
             kantarForm = djangoForms.kantarForm()
             context['kantarForm'] = kantarForm
             context['now'] = helperFunctions.datetime_to_int()
@@ -38,7 +53,6 @@ def mainPageView(request):
             context['kantarFormu'] = djangoForms.faturasizForm
 
             context['satislar'] = getSatisQuery(30)
-
 
             return render(request, "mainPage/mainPage.html", context=context)
 
@@ -344,6 +358,61 @@ def getQueryBuy(queryDict):
 
     print(query)
     return query
+
+
+def timedQuery(queryDate):
+    utc = pytz.UTC
+    today = datetime.today().replace(tzinfo=utc)
+    allAlimlar = models.MalAlim.objects.all()
+    queryResult = []
+    for alim in allAlimlar:
+        if today < alim.kantar.tarih + genelDateTime.timedelta(days=queryDate):
+            queryResult.append(alim)
+        else:
+            pass
+    return queryResult
+
+
+def pivotBuy(query):
+    typesOfMaterials = []
+    queryResultMiktar = {}
+    queryResultFire = {}
+    queryResultOdeme = {}
+
+    for alim in query:
+        if alim.mal in typesOfMaterials:
+            pass
+        else:
+            typesOfMaterials.append(alim.mal)
+    # print(typesOfMaterials)
+
+    for mat in typesOfMaterials:
+        queryResultMiktar[f'{mat}'] = 0
+        queryResultFire[f'{mat}'] = 0
+        queryResultOdeme[f'{mat}'] = 0
+
+    # Miktar
+    for mat in typesOfMaterials:
+        for alim in query:
+            queryResultMiktar[f'{alim.mal}'] += alim.miktar
+    for key, value in queryResultMiktar.items():
+        queryResultMiktar[key] = value / len(queryResultMiktar)
+
+    # Fire
+    for mat in typesOfMaterials:
+        for alim in query:
+            queryResultFire[f'{alim.mal}'] += alim.hurda
+    for key, value in queryResultFire.items():
+        queryResultFire[key] = value / len(queryResultFire)
+
+    # Ödeme
+    for mat in typesOfMaterials:
+        for alim in query:
+            queryResultOdeme[f'{alim.mal}'] += alim.odenecek
+    for key, value in queryResultOdeme.items():
+        queryResultOdeme[key] = value / len(queryResultOdeme)
+
+    return [queryResultMiktar, queryResultFire, queryResultOdeme]
 
 
 def queryTable(request):
